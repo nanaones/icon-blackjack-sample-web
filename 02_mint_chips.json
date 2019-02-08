@@ -1,0 +1,18 @@
+{
+	"jsonrpc": "2.0",
+	"method": "icx_sendTransaction",
+	"params": {
+		"version": "0x3",
+		"from": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",	          
+		"value": "0x77359400",
+	  "stepLimit": "0x12345000",
+		"timestamp": "0x573117f1d6568",
+		"nid": "0x3",
+		"nonce": "0x1",
+		"to": "cxf516a4d779e8b135cbe186fc9eaf8358fb407e3f",
+		"dataType": "call",
+			"data": {
+				"method": "mint_chips"
+												    }
+												      },
+												        "id": 1}

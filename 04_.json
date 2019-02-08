@@ -1,0 +1,11 @@
+{
+	"jsonrpc": "2.0",
+	"method": "icx_call",
+	"params": {
+		"to": "cxf516a4d779e8b135cbe186fc9eaf8358fb407e3f",
+		"dataType": "call",
+			"data": {
+				"method": "show_game_room_list"
+												    }
+												      },
+												        "id": 1}
