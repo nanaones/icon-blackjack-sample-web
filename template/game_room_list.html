@@ -1,0 +1,82 @@
+{% extends 'original.html' %}
+{% load static %}
+{% block content %}
+
+
+  <header class="masthead">
+    <div class="container">
+      <div class="intro-text">
+        <div class="intro-heading text-uppercase">Enjoy Black Jack</div>
+      </div>
+    </div>
+  </header>
+
+
+  <section class="bg-light" id="portfolio">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase">GameRoom list</h2>
+          <h3 class="section-subheading text-muted">Click to Join.</h3>
+        </div>
+
+
+      </div>
+      <div class="row">
+
+{% for key, value in WaitRoom.items %}
+
+        <div class="col-md-4 col-sm-6 portfolio-item">
+          <a class="portfolio-link" data-toggle="modal" href='#{{key}}'>
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src='{% static "img/portfolio/01-thumbnail.jpg" %}' alt="">
+          </a>
+          <div class="portfolio-caption">
+            <h4>{{key}}</h4>
+            <p class="text-muted">{{value.Name}}</p>
+          </div>
+        </div>
+
+{% endfor %}
+      </div>
+    </div>
+  </section>
+
+
+{% for key, value in WaitRoom.items %}
+        <!-- Modal 1 -->
+  <div class="portfolio-modal modal fade" id={{key}} tabindex="-1" role="dialog" aria-hidden="true">
+  <!--<div class="portfolio-modal modal fade" id='portfolioModal1' tabindex="-1" role="dialog" aria-hidden="true">-->
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="close-modal" data-dismiss="modal">
+          <div class="lr">
+            <div class="rl"></div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <div class="modal-body">
+                <!-- Project Details Go Here -->
+                <h2 class="text-uppercase">{{key}}</h2>
+                <p class="item-intro text-muted">{{value.Explain}}</p>
+                <p class="item-intro text-muted">{{value.Prize}}</p>
+                <p class="item-intro text-muted">{{value.Time}}</p>
+                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                  <i class="fas fa-times"></i>
+                  Close </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
