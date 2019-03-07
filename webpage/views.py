@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .forms import NetForm, Article
-from .models import Network, Makegameroom
-from . import tests
+from .forms import NetForm, Article, GameRoomlistForm
+from .models import Network, MakeGameRoom
+from . import UseSDK
 import os
 from django.shortcuts import redirect
 from django.template import loader
@@ -18,20 +18,19 @@ DIR_PATH = os.path.abspath(os.path.dirname('__file__'))
 
 
 
-
-def first(request):
-    form = Network()
-    if request.method == "POST":
-        form = NetForm(request.POST)
-        if form.is_valid():
-            form.save()
-    else:
-        form = NetForm()
-    return render(request, "index.html",  {"form" : form})
-    # return render(request, "index.html")
+#
+# def first(request):
+#     form = Network()
+#     if request.method == "POST":
+#         form = NetForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#     else:
+#         form = NetForm()
+#     return render(request, "index.html",  {"form" : form})
 
 def MakeGameRoom(request):
-    form = Makegameroom()
+    form = GameRoomlistForm()
     if request.method == "POST":
         form = NetForm(request.POST)
         if form.is_valid():
@@ -41,18 +40,25 @@ def MakeGameRoom(request):
     return render(request, "MakeGameRoom.html",  {"form" : form})
     # return render(request, "index.html")
 
-def sample(request):
-    # network_list = Network.objects.all()
+
+def Mint(request):
+    return render(request, "MintToken.html")
+
+def Sample(request):
     return render(request, "Sample.html")
 
+def balance(request):
+    # return render(request, "iconex_connect_sample.1.html")
+    return render(request, "balance.html")
 
-def room_list(request):
 
-    __data=tests.JSONRPCcalls()
-    data=__data.show_game_room_list()
+def RoomList(request):
+
+    __data=UseSDK.JsonRPCCalls()
+    _data=__data.show_game_room_list()
     out_data={}
     roomnumber = 0
-    for readdata in data:
+    for readdata in _data:
         print(readdata)
         temp={}
         splited = readdata.split(".")
@@ -66,6 +72,6 @@ def room_list(request):
 
 def Original(request):
 
-    __data = tests.JSONRPCcalls()
+    __data = UseSDK.JSONRPCcalls()
 
     return render(request, "Qury.html")

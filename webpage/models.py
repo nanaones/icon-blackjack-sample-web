@@ -35,7 +35,7 @@ class Network(models.Model):
     url = models.URLField()
 
 
-class Makegameroom(models.Model):
-    useraddress = models.CharField(max_length=50)
+class MakeGameRoom(models.Model):
+    user_address = models.CharField(max_length=50)
     prize_per_game = models.CharField(max_length=50)
 

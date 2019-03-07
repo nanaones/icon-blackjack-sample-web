@@ -21,9 +21,11 @@ urlpatterns = [
     # path('main/', views.first, name='main'),
     # path('main/list/', views.check, name='list'),
     # path('view/<int:num>', views.view, name='list'),
-    path('Sample/', views.sample),
+    path('Sample/', views.Sample),
     # path('test/', views.Gameroom_list, name='game'),
     path('Ori/', views.Original),
-    path('room/', views.room_list),
+    path('room/', views.RoomList),
+    path('mint/', views.Mint),
     path('make/', views.MakeGameRoom),
+    path('balance/', views.balance),
 ]

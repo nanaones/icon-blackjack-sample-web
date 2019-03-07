@@ -4,7 +4,7 @@ from .models import Article
 
 from .models import Network
 
-from .models import Makegameroom
+from .models import MakeGameRoom
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -18,7 +18,7 @@ class NetForm(forms.ModelForm):
         fields = ['url']
 
 
-class GameroomlistForm(forms.ModelForm):
+class GameRoomlistForm(forms.ModelForm):
     class Meta :
-        model = Makegameroom
-        fields = ['useraddress', 'prize_per_game']
+        model = MakeGameRoom
+        fields = ['user_address', 'prize_per_game']

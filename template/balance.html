@@ -23,11 +23,15 @@
 
 
 <h2 class="section-heading text-uppercase">Token Balance</h2>
+<br>
+<br>
 <!-- <button id="request-address" class="btn btn-primary btn-xl text-uppercase" onclick="getbalance()"> Load Your Wallet</button> -->
 <button id="request-address" class="btn btn-primary btn-xl text-uppercase"> Load Your Wallet</button>
+<br><br></div>
 <p id="token-balance" class="section-heading text-uppercase" > your Token Balances : </p>
-<p id="Call-result" class="section-heading text-uppercase" > your Token Balances : </p>
-
+<div class="col-lg-12 text-center">
+<p id="Call-result" class="section-heading text-uppercase" > Load Your Wallet </p>
+</div>
 
           </div>
         </div>
@@ -79,38 +83,63 @@
   <!-- JS code -->
   <script src="http://cdn.jsdelivr.net/gh/icon-project/icon-sdk-js@latest/build/icon-sdk-js.web.min.js"></script>
   <script>
-      var iconService = window['icon-sdk-js']
-      var provider = new iconService.HttpProvider('https://bicon.net.solidwallet.io/api/v3')
-      var IconWallet = iconService.IconWallet
-      var IconAmount = iconService.IconAmount
-      var IconConverter = iconService.IconConverter
-      var IconBuilder = iconService.IconBuilder
+      var IconService = window['icon-sdk-js']
+      var provider = new IconService.HttpProvider('https://bicon.net.solidwallet.io/api/v3')
+      var IconServices = new IconService(provider)
+      var IconWallet = IconServices.IconWallet
+      var IconAmount = IconServices.IconAmount
+      var IconConverter = IconService.IconConverter
+      var IconBuilder = IconService.IconBuilder
 
       var requestaddress = document.getElementById("request-address")
       var Callresult = document.getElementById("Call-result")
 
+      window.addEventListener("ICONEX_RELAY_RESPONSE", eventHandler, false);
 
-      
+
+      function eventHandler(event) {
+            var type = event.detail.type
+            var payload = event.detail.payload
+            switch (type) {
+                case "RESPONSE_HAS_ACCOUNT":
+                    responseHasAccount.innerHTML = "> Result : " + payload.hasAccount + " (" + typeof payload.hasAccount + ")";
+                    break
+                case "RESPONSE_HAS_ADDRESS":
+                    responseHasAddress.innerHTML = "> Result : " + payload.hasAddress + " (" + typeof payload.hasAddress + ")";
+                    break
+                case "RESPONSE_ADDRESS":
+                    fromAddress = payload
+                    balance = new getbalance();  
+
+                    balance.then(function(result) {
+
+                      console.log(result); // "Stuff worked!"
+                      Callresult.innerHTML = IconConverter.toBigNumber(result);
+
+                    }, function(err) {
+                       Callresult.innerHTML = err;
+                       console.log(err); // Error: "It broke"
+                    });
+                    break
+                default:
+            }
+        }
+
+
       function getbalance() {
-        var callBuilder = new IconBuilder.callBuilder;
-        var callTransaction = callBuilder
-            .from(fromAddress.value)
+
+        var iconCallBuilder = new IconBuilder.CallBuilder;
+        var callTransaction = iconCallBuilder
+            .from(fromAddress)
             .to('cx89245b4a663f2062a9fe52a219c44c281e1d6c36')
             .method('balanceOf')
             .params('')
             .build()
-          scoreData.value = JSON.stringify({
-                      "jsonrpc": "2.0",
-                      "method": "icx_call",
-                      "params": callTransaction,
-                      "id": 8015                  })
-
-                      var parsed = JSON.parse(scoreData.value)
-          
-        const Callresult = new iconService.call(callTransaction).execute();
-        Callresult.innerHTML = Callresult.value
+        data = IconServices.call(callTransaction).execute();
+        console.log(data);
+        return data
+      
       }
-
 
       requestaddress.onclick = function () {
             window.dispatchEvent(new CustomEvent('ICONEX_RELAY_REQUEST', {
@@ -118,11 +147,7 @@
                     type: 'REQUEST_ADDRESS'
                 }
             }))
-        
-            balance = new getbalance()
         }
-
-
 
   </script>
 <!--in data-->
