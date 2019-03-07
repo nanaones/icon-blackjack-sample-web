@@ -14,7 +14,7 @@ a. Ori
     ``` /Ori```  
   1. Template의 Original Page 
   
-b. room  
+b. Room  
     ```/room```   
   1. 현재 존재하는 게임룸 출력
   2. Testnet에 배포되어있는 Sample Game SCORE
@@ -30,9 +30,14 @@ c. Sample
   1. ICONex Wallet에서 제공한 Sample 을 구현
   2. Transaction 전송 기능 구현[미구현]
 
-d. make
+d. Make Game Room
 
 ``` /make ```
+
+e. Check Token Balance
+
+``` /balance ```
+
 
 1. Sample Game SCORE의 create_room 메서드를 실행하여 게임룸을 만드는 페이지
 2. create_room 메서드를 icx_SendTransaction 을 통해서 gameroom 을 생성한다. [미구현]
