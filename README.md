@@ -39,15 +39,15 @@ e. Check Token Balance
 
 ``` /balance ```
 
-    1. ICONex 를 통해, BlackJack Game에 있는 BalanceOf(msg.sender) 메서드를 호출하여, 현재 사용자의 Balance를 조회한다. 
+  1. ICONex 를 통해, BlackJack Game에 있는 BalanceOf(msg.sender) 메서드를 호출하여, 현재 사용자의 Balance를 조회한다. 
     
 f. Mint Token
 
 ``` /mint ```
 
-    1. 사용자가 원하는 만큼의 Token을 mint 한다.
-    2. BlackJack Game에 있는 mintToken() 메서드를 통해 Token을 Mint 한다.  
-    3. Sign에는 ICONex를 활용한다.
+  1. 사용자가 원하는 만큼의 Token을 mint 한다.
+  2. BlackJack Game에 있는 mintToken() 메서드를 통해 Token을 Mint 한다.  
+  3. Sign에는 ICONex를 활용한다.
     
 1. Sample Game SCORE의 create_room 메서드를 실행하여 게임룸을 만드는 페이지
 2. create_room 메서드를 icx_SendTransaction 을 통해서 gameroom 을 생성한다. [미구현]
