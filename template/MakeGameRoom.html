@@ -1,4 +1,5 @@
 {% extends 'original.html' %}
+{% load static %}
 {% block content %}
 
   <!-- Header -->
@@ -8,38 +9,46 @@
   </header>
 <!-- end -->
 
+  
   <!-- Contact -->
   <section id="contact">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Make Room</h2>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="col-lg-12 text-center">
+        <div class="row">
+          <div class="col-lg-12">
+              <p> <input class="form-amount" id="amount-loop" style="width:1110px" type="int" placeholder="prize_per_game / default is 10 " required="required" data-validation-required-message="Please enter value.">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <textarea id="score-data" rows="20" cols = "50" placeholder="Request Json"  data-validation-required-message="Please enter a message."></textarea>
+                      <p class="help-block text-danger"></p>
+                    </div>
+                  </div>
 
+                  <div class="col-md-6">
+                      <div class="form-group">
+                        <textarea id="score-response" rows="20" cols = "50" placeholder="Response Json"  data-validation-required-message="Please enter a message."></textarea>
+                        <p class="help-block text-danger"></p>
+                      </div>
+                    </div>
 
-<h2 class="section-heading text-uppercase">Make Room</h2>
-
-<form id="request-score-form">
-    <p>
-   </p>
-</form>
-
-
-<input class="form-amount" id="amount-loop" style="width:500px" type="int" placeholder="prize_per_game / default is 10 " required="required" data-validation-required-message="Please enter value.">
-<p>Param Data: <br><textarea id="score-data" rows="20" cols = "50"></textarea></p>
-<button id="request-address" class="btn btn-primary btn-xl text-uppercase"> Load Your Wallet</button>
-<button id="request-score" class="btn btn-primary btn-xl text-uppercase" >Make it!</button>
-
+                  <div class="clearfix"></div>
+                  <div class="col-lg-12 text-center">
+                    <div id="success"></div>
+                    <button id="request-address" class="btn btn-primary btn-xl text-uppercase" >Load Wallet</button>
+                    <button id="request-score" class="btn btn-primary btn-xl text-uppercase" >Make   it !!!!!!!!!!</button>
+                  </div>
+                  
+                </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
 
   <!-- Footer -->
   <footer>
@@ -85,14 +94,13 @@
   <!-- JS code -->
   <script src="http://cdn.jsdelivr.net/gh/icon-project/icon-sdk-js@latest/build/icon-sdk-js.web.min.js"></script>
   <script>
-      function JSONstringify(json) {if (typeof json != 'string') {json = JSON.stringify(json, undefined, '\t');}var arr = [],_string = 'color:green',_number = 'color:darkorange',_boolean = 'color:blue',_null = 'color:magenta',_key = 'color:red';json = json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {var style = _number;if (/^"/.test(match)) {if (/:$/.test(match)) {style = _key;} else {style = _string;}} else if (/true|false/.test(match)) {style = _boolean;} else if (/null/.test(match)) {style = _null;}arr.push(style);arr.push('');return '%c' + match + '%c';});arr.unshift(json);console.log.apply(console, arr);};void(0);
-      var iconService = window['icon-sdk-js']
-      var provider = new iconService.HttpProvider('https://bicon.net.solidwallet.io/api/v3')
-      var IconWallet = iconService.IconWallet
-      var IconAmount = iconService.IconAmount
-      var IconConverter = iconService.IconConverter
-      var IconBuilder = iconService.IconBuilder
-  
+      var IconService = window['icon-sdk-js']
+      var HttpProvider = IconService.HttpProvider
+      var IconServices = new IconService(new HttpProvider('https://bicon.net.solidwallet.io/api/v3'))
+      var IconWallet = IconServices.IconWallet
+      var IconAmount = IconServices.IconAmount
+      var IconConverter = IconService.IconConverter
+      var IconBuilder = IconService.IconBuilder
 
 
       var amount_loop = document.getElementById("amount-loop")
@@ -108,10 +116,13 @@
 
       var sendAddress = document.getElementById("send-address")
       var sendAmount = document.getElementById("send-amount")
+
       var scoreData = document.getElementById("score-data")
       var signingData = document.getElementById("signing-data")
 
       var jsonRpc2 = document.getElementById("json-rpc-2")
+      var tx_result = document.getElementById("tx-result")
+      var scoreresponse = document.getElementById("score-response")
 
       window.addEventListener("ICONEX_RELAY_RESPONSE", eventHandler, false);
 
@@ -123,7 +134,14 @@
                   fromAddress = payload
                   break
               case "RESPONSE_JSON-RPC":
-                  responseScore.value = JSON.stringify(payload, null, 4);
+                  setTimeout(function Tx_result(hash){
+                    IconServices.getTransactionResult(payload.result).execute().then(
+                      function(result) {
+                        JSON.stringify(result)
+                        scoreresponse.innerHTML = JSON.stringify(result);
+                    }, function(error){
+                      confirm.log(error)
+                    });}, 4000)
                   break
               case "CANCEL_JSON-RPC":
                   responseScore.value = null;
@@ -150,7 +168,6 @@
           }))
       }
 
-
       requestScore.onclick = function () {
         var callTransactionBuilder = new IconBuilder.CallTransactionBuilder;
         var callTransactionData = callTransactionBuilder
@@ -167,8 +184,8 @@
                       "jsonrpc": "2.0",
                       "method": "icx_sendTransaction",
                       "params": IconConverter.toRawTransaction(callTransactionData),
-                      "id": 8015                  })
-
+                      "id": 8015
+                      })
 
           var parsed = JSON.parse(scoreData.value)
           if (parsed.method === "icx_sendTransaction" && !fromAddress) {

@@ -12,6 +12,7 @@
   </header>
 
 
+  
   <section class="bg-light" id="portfolio">
     <div class="container">
       <div class="row">
@@ -19,11 +20,88 @@
           <h2 class="section-heading text-uppercase">GameRoom list</h2>
           <h3 class="section-subheading text-muted">Click to Join.</h3>
         </div>
-
-
       </div>
       <div class="row">
 
+
+  
+    <!-- JS code -->
+    <script src="http://cdn.jsdelivr.net/gh/icon-project/icon-sdk-js@latest/build/icon-sdk-js.web.min.js"></script>
+    <script>
+        var IconService = window['icon-sdk-js']
+        var provider = new IconService.HttpProvider('https://bicon.net.solidwallet.io/api/v3')
+        var IconServices = new IconService(provider)
+        var IconWallet = IconServices.IconWallet
+        var IconAmount = IconServices.IconAmount
+        var IconConverter = IconService.IconConverter
+        var IconBuilder = IconService.IconBuilder
+  
+        var requestaddress = document.getElementById("request-address")
+        var Callresult = document.getElementById("Call-result")
+  
+        window.addEventListener("ICONEX_RELAY_RESPONSE", eventHandler, false);
+  
+  
+        function eventHandler(event) {
+              var type = event.detail.type
+              var payload = event.detail.payload
+              switch (type) {
+                  case "RESPONSE_HAS_ACCOUNT":
+                      responseHasAccount.innerHTML = "> Result : " + payload.hasAccount + " (" + typeof payload.hasAccount + ")";
+                      break
+                  case "RESPONSE_HAS_ADDRESS":
+                      responseHasAddress.innerHTML = "> Result : " + payload.hasAddress + " (" + typeof payload.hasAddress + ")";
+                      break
+                  case "RESPONSE_ADDRESS":
+                      fromAddress = payload
+                      balance = new getbalance();  
+  
+                      balance.then(function(result) {
+  
+                        console.log(result); // "Stuff worked!"
+                        Callresult.innerHTML = IconConverter.toBigNumber(result);
+  
+                      }, function(err) {
+                         Callresult.innerHTML = err;
+                         console.log(err); // Error: "It broke"
+                      });
+                      break
+                  default:
+              }
+          }
+  
+  
+        function getbalance() {
+  
+          var iconCallBuilder = new IconBuilder.CallBuilder;
+          var callTransaction = iconCallBuilder
+              .from(fromAddress)
+              .to('cx89245b4a663f2062a9fe52a219c44c281e1d6c36')
+              .method('balanceOf')
+              .params('')
+              .build()
+          data = IconServices.call(callTransaction).execute();
+          console.log(data);
+          return data
+        
+        }
+  
+        requestaddress.onclick = function () {
+              window.dispatchEvent(new CustomEvent('ICONEX_RELAY_REQUEST', {
+                  detail: {
+                      type: 'REQUEST_ADDRESS'
+                  }
+              }))
+          }
+  
+    </script>
+
+
+
+
+
+
+<!-- 파이썬 SDK 활용 -->
 {% for key, value in WaitRoom.items %}
 
         <div class="col-md-4 col-sm-6 portfolio-item">
@@ -42,6 +120,7 @@
         </div>
 
 {% endfor %}
+
       </div>
     </div>
   </section>
@@ -79,4 +158,46 @@
   </div>
 {% endfor %}
 
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <span class="copyright">Copyright &copy; Your Website 2019</span>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline social-buttons">
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-inline quicklinks">
+                <li class="list-inline-item">
+                  <a href="#">Privacy Policy</a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">Terms of Use</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
 {% endblock %}
