@@ -5,8 +5,9 @@ ICON SCORE의 Sample로 활용한다.
 ## 개발환경
 -   Python3.6
 -   django 2.0.1
--   iconsdk
-
+-   iconSDK(Python)
+-   iconSDK(Java Script)
+  
 ## Page
 ### 작성된 페이지
     
