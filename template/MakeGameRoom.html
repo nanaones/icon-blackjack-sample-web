@@ -177,8 +177,8 @@
                       .timestamp((new Date()).getTime() * 1000)
                       .stepLimit(IconConverter.toBigNumber(10000000))
                       .version(IconConverter.toBigNumber(3))
-                      .method('create_room')
-                      .params({"prize_per_game":amount_loop.value})
+                      .method('createRoom')
+                      .params({"_prizePerGame":amount_loop.value})
                       .build()
                   scoreData.value = JSON.stringify({
                       "jsonrpc": "2.0",

@@ -19,22 +19,10 @@ class JsonRPCCalls():
         icon_service = IconService(HTTPProvider("https://bicon.net.solidwallet.io/api/v3"))
         call = CallBuilder().from_(self.keywallet_address) \
             .to(self.sample_game_score_address) \
-            .method("show_game_room_list") \
+            .method("showGameRoomList") \
             .build()
 
         response = icon_service.call(call)
 
         return response
 
-    def show_balance(self):
-
-        # icon_service = IconService(HTTPProvider("http://localhost:9000/api/v3"))
-        icon_service = IconService(HTTPProvider("https://bicon.net.solidwallet.io/api/v3"))
-        call = CallBuilder().from_(self.keywallet_address) \
-            .to(self.sample_game_score_address) \
-            .method("show_game_room_list") \
-            .build()
-
-        response = icon_service.call(call)
-
-        return response
