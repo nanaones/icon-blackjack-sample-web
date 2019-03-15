@@ -1,77 +1,55 @@
 from django.shortcuts import render
-from .forms import NetForm, Article, GameRoomlistForm
-from .models import Network, MakeGameRoom
+from .forms import GameRoomListForm
 from . import UseSDK
 import os
-from django.shortcuts import redirect
-from django.template import loader
-from django.http import HttpResponse, HttpResponseRedirect
+
 DIR_PATH = os.path.abspath(os.path.dirname('__file__'))
 
-# def first(request):
-#     # template = loader.get_template('templates/index.html')
-#     template = loader.get_template('/index.html')
-#     context = {
-#         'latest_question_list': "test",
-#     }
-#     return HttpResponse(template.render(context, request))
 
-
-
-#
-# def first(request):
-#     form = Network()
-#     if request.method == "POST":
-#         form = NetForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#     else:
-#         form = NetForm()
-#     return render(request, "index.html",  {"form" : form})
-
-def MakeGameRoom(request):
-    form = GameRoomlistForm()
+def make_game_room(request):
+    form = GameRoomListForm()
     if request.method == "POST":
-        form = NetForm(request.POST)
+        form = GameRoomListForm(request.POST)
         if form.is_valid():
             form.save()
     else:
-        form = NetForm()
-    return render(request, "MakeGameRoom.html",  {"form" : form})
-    # return render(request, "index.html")
+        form = GameRoomListForm()
+    return render(request, "MakeGameRoom.html")
 
 
-def Mint(request):
+def mint(request):
     return render(request, "MintToken.html")
 
-def Sample(request):
+
+def sample(request):
     return render(request, "Sample.html")
+
 
 def balance(request):
     # return render(request, "iconex_connect_sample.1.html")
     return render(request, "balance.html")
 
 
-def RoomList(request):
+def room_list(request):
+    _data=UseSDK.JsonRPCCalls()
+    _data=_data.show_game_room_list()
+    _out_data={}
+    _room_number = 0
+    for _ in _data:
+        print(_)
+        _temp={}
+        _splited = _.split(".")
+        _temp["Name"] = _splited[0]
+        _temp["Address"] = _splited[0].split(" ")[0]
+        _temp["Explain"] = _splited[1]
+        _temp["Prize"] = _splited[2]
+        _temp["Time"] = _splited[3]
+        _out_data["RoomNo"+str(_room_number)] = _temp
+        _room_number += 1
+    return render(request, "game_room_list.html", {"WaitRoom" : _out_data})
 
-    __data=UseSDK.JsonRPCCalls()
-    _data=__data.show_game_room_list()
-    out_data={}
-    roomnumber = 0
-    for readdata in _data:
-        print(readdata)
-        temp={}
-        splited = readdata.split(".")
-        temp["Name"] = splited[0]
-        temp["Explain"] = splited[1]
-        temp["Prize"] = splited[2]
-        temp["Time"] = splited[3]
-        out_data["RoomNo"+str(roomnumber)] = temp
-        roomnumber += 1
-    return render(request, "game_room_list.html", {"WaitRoom" : out_data})
 
-def Original(request):
-
+def original(request):
     __data = UseSDK.JSONRPCcalls()
-
     return render(request, "Qury.html")
+

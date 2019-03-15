@@ -7,12 +7,11 @@
     <div class="container">
       <div class="intro-text">
         <div class="intro-heading text-uppercase">Enjoy Black Jack</div>
+        <button id="request-address" class="btn btn-primary btn-xl text-uppercase"> Load Your Wallet</button>
       </div>
     </div>
   </header>
 
-
-  
   <section class="bg-light" id="portfolio">
     <div class="container">
       <div class="row">
@@ -22,82 +21,6 @@
         </div>
       </div>
       <div class="row">
-
-
-  
-    <!-- JS code -->
-    <script src="http://cdn.jsdelivr.net/gh/icon-project/icon-sdk-js@latest/build/icon-sdk-js.web.min.js"></script>
-    <script>
-        var IconService = window['icon-sdk-js']
-        var provider = new IconService.HttpProvider('https://bicon.net.solidwallet.io/api/v3')
-        var IconServices = new IconService(provider)
-        var IconWallet = IconServices.IconWallet
-        var IconAmount = IconServices.IconAmount
-        var IconConverter = IconService.IconConverter
-        var IconBuilder = IconService.IconBuilder
-  
-        var requestaddress = document.getElementById("request-address")
-        var Callresult = document.getElementById("Call-result")
-  
-        window.addEventListener("ICONEX_RELAY_RESPONSE", eventHandler, false);
-  
-  
-        function eventHandler(event) {
-              var type = event.detail.type
-              var payload = event.detail.payload
-              switch (type) {
-                  case "RESPONSE_HAS_ACCOUNT":
-                      responseHasAccount.innerHTML = "> Result : " + payload.hasAccount + " (" + typeof payload.hasAccount + ")";
-                      break
-                  case "RESPONSE_HAS_ADDRESS":
-                      responseHasAddress.innerHTML = "> Result : " + payload.hasAddress + " (" + typeof payload.hasAddress + ")";
-                      break
-                  case "RESPONSE_ADDRESS":
-                      fromAddress = payload
-                      balance = new getbalance();  
-  
-                      balance.then(function(result) {
-  
-                        console.log(result); // "Stuff worked!"
-                        Callresult.innerHTML = IconConverter.toBigNumber(result);
-  
-                      }, function(err) {
-                         Callresult.innerHTML = err;
-                         console.log(err); // Error: "It broke"
-                      });
-                      break
-                  default:
-              }
-          }
-  
-  
-        function getbalance() {
-  
-          var iconCallBuilder = new IconBuilder.CallBuilder;
-          var callTransaction = iconCallBuilder
-              .from(fromAddress)
-              .to('cx89245b4a663f2062a9fe52a219c44c281e1d6c36')
-              .method('balanceOf')
-              .params('')
-              .build()
-          data = IconServices.call(callTransaction).execute();
-          console.log(data);
-          return data
-        
-        }
-  
-        requestaddress.onclick = function () {
-              window.dispatchEvent(new CustomEvent('ICONEX_RELAY_REQUEST', {
-                  detail: {
-                      type: 'REQUEST_ADDRESS'
-                  }
-              }))
-          }
-  
-    </script>
-
-
-
 
 
 
@@ -118,19 +41,19 @@
             <p class="text-muted">{{value.Name}}</p>
           </div>
         </div>
-
 {% endfor %}
 
+
+<!-- Sections end -->
       </div>
     </div>
   </section>
 
 
 {% for key, value in WaitRoom.items %}
-        <!-- Modal 1 -->
-  <div class="portfolio-modal modal fade" id={{key}} tabindex="-1" role="dialog" aria-hidden="true">
-  <!--<div class="portfolio-modal modal fade" id='portfolioModal1' tabindex="-1" role="dialog" aria-hidden="true">-->
-    <div class="modal-dialog">
+<!-- 세부페이지 내용 -->
+<div class="portfolio-modal modal fade" id={{key}} tabindex="-1" role="dialog" aria-hidden="true">
+   <div class="modal-dialog">
       <div class="modal-content">
         <div class="close-modal" data-dismiss="modal">
           <div class="lr">
@@ -146,9 +69,11 @@
                 <p class="item-intro text-muted">{{value.Explain}}</p>
                 <p class="item-intro text-muted">{{value.Prize}}</p>
                 <p class="item-intro text-muted">{{value.Time}}</p>
-                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                  <i class="fas fa-times"></i>
-                  Close </button>
+                  <form>
+                    <button class="btn btn-primary" id = "request-to-join" data-dismiss="modal" type="button" >
+                    <!-- <button class="btn btn-primary" data-dismiss="modal" type="button" onclick = " location.href =  '{{value.Address}}'  "> -->
+                        Join Room </button>
+                  </form>
               </div>
             </div>
           </div>
@@ -157,9 +82,6 @@
     </div>
   </div>
 {% endfor %}
-
-
-
 
     <!-- Footer -->
     <footer>
@@ -200,4 +122,108 @@
           </div>
         </div>
       </footer>
+
+
+    <!-- JS code -->
+    <script src="http://cdn.jsdelivr.net/gh/icon-project/icon-sdk-js@latest/build/icon-sdk-js.web.min.js"></script>
+    <script>
+        var IconService = window['icon-sdk-js']
+        var provider = new IconService.HttpProvider('https://bicon.net.solidwallet.io/api/v3')
+        var IconServices = new IconService(provider)
+        var IconWallet = IconService.IconWallet
+        var IconAmount = IconService.IconAmount
+        var IconConverter = IconService.IconConverter
+        var IconBuilder = IconService.IconBuilder
+  
+        var requestaddress = document.getElementById("request-address")
+        var Callresult = document.getElementById("Call-result")
+        var joinbtn = document.getElementById("request-to-join")
+  
+        var scoreData;
+
+        window.addEventListener("ICONEX_RELAY_RESPONSE", eventHandler, false);
+  
+  
+        function eventHandler(event) {
+              var type = event.detail.type
+              var payload = event.detail.payload
+              switch (type) {
+                  case "RESPONSE_HAS_ACCOUNT":
+                      responseHasAccount.innerHTML = "> Result : " + payload.hasAccount + " (" + typeof payload.hasAccount + ")";
+                      break
+                  case "RESPONSE_HAS_ADDRESS":
+                      responseHasAddress.innerHTML = "> Result : " + payload.hasAddress + " (" + typeof payload.hasAddress + ")";
+                      break
+                  case "RESPONSE_ADDRESS":
+                      fromAddress = payload
+                      console.log(fromAddress)
+                      break
+                  case "RESPONSE_JSON-RPC": 
+                      txhash = payload
+                      console.log(txhash)
+                      
+                  default:
+              }
+          }
+  
+        requestaddress.onclick = function () {
+          window.dispatchEvent(new CustomEvent('ICONEX_RELAY_REQUEST', {
+                detail: {
+                    type: 'REQUEST_ADDRESS'
+                }
+            }))
+        }
+          console.log(requestaddress)
+          joinbtn.onclick = function () {
+
+          var icxTransactionBuilder = new IconBuilder.IcxTransactionBuilder;
+          var icxTransferData = icxTransactionBuilder
+              .from(fromAddress)
+              .to("cx89245b4a663f2062a9fe52a219c44c281e1d6c36")
+              .nid(IconConverter.toBigNumber(3))
+              .timestamp((new Date()).getTime() * 1000)
+              .version(IconConverter.toBigNumber(3))
+              .stepLimit(IconConverter.toBigNumber(100000))
+              .method("join_room")
+              // .params({"_gameRoomId" : })
+              .build();
+              console.log(icxTransferData)
+              scoreData = JSON.stringify({
+                        "jsonrpc": "2.0",
+                        "method": "icx_sendTransaction",
+                        "params": IconConverter.toRawTransaction(icxTransferData),
+                        "id": 8015
+                    });
+          console.log(scoreData);
+        
+
+
+
+            var parsed = JSON.parse(scoreData)
+            if (parsed.method === "icx_sendTransaction" && !fromAddress) {
+                alert('Select the ICX Address')
+                return
+            }
+
+            window.dispatchEvent(new CustomEvent('ICONEX_RELAY_REQUEST', {
+                detail: {
+                    type: 'REQUEST_JSON-RPC',
+                    payload: parsed
+                }
+            }))
+        }
+
+
+
+      // joinbtn.onclick = function(){
+
+      // console.log(joinbtn)
+
+
+      // }                                 
+  
+    </script>
+
+
+
 {% endblock %}
