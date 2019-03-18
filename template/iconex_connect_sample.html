@@ -90,6 +90,7 @@
         var jsonRpc3 = document.getElementById("json-rpc-3")
 
         window.addEventListener("ICONEX_RELAY_RESPONSE", eventHandler, false);
+        
         function eventHandler(event) {
             var type = event.detail.type
             var payload = event.detail.payload
@@ -122,7 +123,6 @@
                     signingData.value = null
                     responseSigning.value = "> Signature : ";
                     break
-
                 default:
             }
         }

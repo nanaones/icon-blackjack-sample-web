@@ -19,7 +19,6 @@ from . import views
 
 urlpatterns = [
     path('Sample/', views.sample),
-    path('Ori/', views.original),
     path('room/', views.room_list),
     path('mint/', views.mint),
     path('make/', views.make_game_room),

@@ -1,19 +1,10 @@
 from django.shortcuts import render
-from .forms import GameRoomListForm
 from . import UseSDK
 import os
 
 DIR_PATH = os.path.abspath(os.path.dirname('__file__'))
 
-
 def make_game_room(request):
-    form = GameRoomListForm()
-    if request.method == "POST":
-        form = GameRoomListForm(request.POST)
-        if form.is_valid():
-            form.save()
-    else:
-        form = GameRoomListForm()
     return render(request, "MakeGameRoom.html")
 
 
@@ -26,7 +17,6 @@ def sample(request):
 
 
 def balance(request):
-    # return render(request, "iconex_connect_sample.1.html")
     return render(request, "balance.html")
 
 
@@ -49,7 +39,4 @@ def room_list(request):
     return render(request, "game_room_list.html", {"WaitRoom" : _out_data})
 
 
-def original(request):
-    __data = UseSDK.JSONRPCcalls()
-    return render(request, "Qury.html")
 
