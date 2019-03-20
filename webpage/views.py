@@ -1,14 +1,22 @@
 from django.shortcuts import render
 from . import UseSDK
 import os
+from django.http.response import HttpResponse
 
 DIR_PATH = os.path.abspath(os.path.dirname('__file__'))
 
+
+#POST, GET 따로 받을 수 있습니다.
 def make_game_room(request):
-    return render(request, "MakeGameRoom.html")
+    if request.method == "GET":
+        return render(request, "MakeGameRoom.html")
+    elif request.method == "POST":
+        return HttpResponse("it works  !!")
+    else:
+        return HttpResponse("go to main Page")
 
 
-def mint(request):
+def mint_token(request):
     return render(request, "MintToken.html")
 
 

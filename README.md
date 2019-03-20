@@ -21,7 +21,7 @@ e. Mint Token
 
 #### a. Room List
 
-```/room```   
+```/roomlist```   
 
   1. 현재 존재하는 게임룸 오래된 순서대로 출력
   2. Testnet에 배포되어있는 Sample Game SCORE
@@ -41,7 +41,7 @@ e. Mint Token
 
 #### c. Make Game Room
 
-``` /make ```
+``` /room ```
 
 1. Game Room 을 만든다.
 2. 입력한 개수의 토큰만큼을 게임 참가비로 하는 게임을 만듭니다.
@@ -57,11 +57,11 @@ e. Mint Token
 1. ICONex 를 통해, BlackJack Game에 있는 BalanceOf(msg.sender) 메서드를 호출하여, 현재 사용자의 Balance를 조회한다. 
 2. **LOAD WALLET** 버튼을 통해 지갑을 로드합니다.
 3. 지갑을 로드한 후, 즉시 선택한 지갑주소의 토큰 잔액이 화면에 보입니다. (Loop 단위입니다.)
-    
+
 
 #### e. Mint Token
 
-``` /mint ```
+``` /token ```
 
 1. 사용자가 원하는 만큼의 Token을 mint 한다.
 2. BlackJack Game에 있는 mintToken() 메서드를 통해 Token을 Mint 합니다.
@@ -77,3 +77,4 @@ e. Mint Token
 2. start django server 
    
     ```$ python manage runserver 0.0.0.0:8000```
+
