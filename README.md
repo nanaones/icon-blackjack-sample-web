@@ -1,7 +1,7 @@
 # Dive-into-ICON-3-DApp
 
 ## Prerequisite
-**If you didn't attend the first workshop 'Dive into ICON - Tools'and second workshop 'Dive into ICON - SCORE', we strongly recommend you to finish the step-by-step quickstart guide below before you attend the second workshop. Don't worry, it won't take long.**
+**If you didn't attend the first workshop 'Dive into ICON - Tools' and second workshop 'Dive into ICON - SCORE', we strongly recommend you to finish the step-by-step quickstart guide below before you attend the second workshop. Don't worry, it won't take long.**
 
 #### Quickstart part 1. Helloworld on local emulated environment
 - [English Guide](https://www.icondev.io/docs/part-1-helloworld-on-local-emulated-environment)
@@ -16,13 +16,14 @@ For this second workshop, following environments are required. If you have any i
 
 - Linux (Ubuntu 18.04 recommended) or OS X
 - Python 3.6 and ```Python IDE``` (**Pycharm recommended**)
+- ```IDE``` for Web Application Development (**VScode recommended**)
 - T-Bears installed
 - **django(2.1.~)** installed
-- **chrome Browser** installed
-- **chrome Browser Extentions, [ICONex](https://chrome.google.com/webstore/detail/iconex/flpiciilemghbmfalicajoolhkkenfel?hl=ko)** installed.
+- **Chrome Browser** installed
+- **Chrome Extentions, [ICONex](https://chrome.google.com/webstore/detail/iconex/flpiciilemghbmfalicajoolhkkenfel?hl=ko)** installed.
 - Git required. Please clone this repo. 
-- **We expect you have some ```python```, ```javascript``` experience, and have basic knowledge about ICON development tools and SCORE.**
-- We expect you have some **WebFramework experience**(```django``` or ```spring```).
+- **We expect you to have some ```python```, ```javascript``` experience, and have basic knowledge about ICON development tools and SCORE.**
+- We expect you to have some **WebFramework experience**(```django``` or ```spring``` ... ).
 
 ## Today's Goal 
 
@@ -72,4 +73,16 @@ Facebook (Dive into ICON) : https://www.facebook.com/groups/DiveintoICON/
 Medium (BLOCKCHAIN STUDY GROUP) : https://medium.com/b-ock-chain
 
 Youtube (ICON Developers) : https://www.youtube.com/channel/UC8h4kVV7w94xmfCz6FbwHhg
+
+#### 7. ICON Workchop Github
+
+https://github.com/icon-project
+
+
+[ICON Tools]
+https://github.com/icon-workshops/Dive-into-ICON-1-Tools
+
+[ICON SCORE(SmartContract On Reliable Environment)]
+https://github.com/icon-workshops/Dive-into-ICON-2-SCORE
+
 
