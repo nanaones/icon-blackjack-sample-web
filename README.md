@@ -1,82 +1,75 @@
-# BLACK JACK 
-ICON SCORE인 Black Jack 에 GUI를 추가하여 사용자가 접근하기 쉽게 한다.  
-ICON SCORE의 Sample로 활용한다.
+# Dive-into-ICON-3-DApp
 
-## 개발환경
--   Python3.6
--   django 2.1.7
--   iconSDK(Python)
--   iconSDK(Java Script)
--   OS X (mojave)
-  
-## Page
+## Prerequisite
+**If you didn't attend the first workshop 'Dive into ICON - Tools'and second workshop 'Dive into ICON - SCORE', we strongly recommend you to finish the step-by-step quickstart guide below before you attend the second workshop. Don't worry, it won't take long.**
 
-```
-a. Room List
-b. Sample
-c. Make Game Room
-d. Check Token Balance
-e. Mint Token
-```
+#### Quickstart part 1. Helloworld on local emulated environment
+- [English Guide](https://www.icondev.io/docs/part-1-helloworld-on-local-emulated-environment)
+- [Korean Guide](/docs/workshop_3_prerequisite_part_1_kr.md)
+
+#### Quickstart part 2. Helloworld on testnet
+- [English Guide](https://www.icondev.io/docs/part-2-hello-world-on-testnet)
+- [Korean Guide](/docs/workshop_3_prerequisite_part_2_kr.md)
 
 
-#### a. Room List
+For this second workshop, following environments are required. If you have any issues, please join the facebook group, [Dive into ICON](https://www.facebook.com/groups/DiveintoICON) and post your questions there ! We are happy to help you. 
 
-```/roomlist```   
+- Linux (Ubuntu 18.04 recommended) or OS X
+- Python 3.6 and ```Python IDE``` (**Pycharm recommended**)
+- T-Bears installed
+- **django(2.1.~)** installed
+- **chrome Browser** installed
+- **chrome Browser Extentions, [ICONex](https://chrome.google.com/webstore/detail/iconex/flpiciilemghbmfalicajoolhkkenfel?hl=ko)** installed.
+- Git required. Please clone this repo. 
+- **We expect you have some ```python```, ```javascript``` experience, and have basic knowledge about ICON development tools and SCORE.**
+- We expect you have some **WebFramework experience**(```django``` or ```spring```).
 
-  1. 현재 존재하는 게임룸 오래된 순서대로 출력
-  2. Testnet에 배포되어있는 Sample Game SCORE
-  
-      ``` SCORE address : cx89245b4a663f2062a9fe52a219c44c281e1d6c36 ``` 
-  
-  3. 2의 SCORE에서 show_game_room_list 의 icx_call 결과 
-  4. Click 으로 세부내용 확인
-  5. 세부내용 페이지에서 진행 가능한 게임일 경우, Join 기능
-  6. Python SDK 를 활용하여 Django 에서 list 를 전달
+## Today's Goal 
 
-#### b. Sample  
+TBD
 
-```/Sample```  
+### Workshop Outline
 
-  1. ICONex Wallet에서 제공한 Sample 을 구현
+TBD
 
-#### c. Make Game Room
+### Sample WebPage
+* Simple Blackjack Webpage
 
-``` /room ```
+ 
+ 
+## Useful Links
 
-1. Game Room 을 만든다.
-2. 입력한 개수의 토큰만큼을 게임 참가비로 하는 게임을 만듭니다.
-3. **LOAD WALLET** 버튼을 통해 지갑을 로드한 후, **MAKE IT** 버튼을 통해 방을 만드는 트랜잭션을 만들 수 있습니다.
-4. 좌측 TextBox는 바라보고있는 노드에게 보내질 JSON Request 를 보여줍니다.
-5. 우측 TextBox는 바라보고있는 노드에게 보낸 request에 대한 Response를 보여줍니다.
-
-
-#### d. Check Token Balance
-
-``` /balance ```
-
-1. ICONex 를 통해, BlackJack Game에 있는 BalanceOf(msg.sender) 메서드를 호출하여, 현재 사용자의 Balance를 조회한다. 
-2. **LOAD WALLET** 버튼을 통해 지갑을 로드합니다.
-3. 지갑을 로드한 후, 즉시 선택한 지갑주소의 토큰 잔액이 화면에 보입니다. (Loop 단위입니다.)
+#### 1. ICON official Github
+https://github.com/icon-project
 
 
-#### e. Mint Token
+#### 2. ICON Developer portal
+https://icondev.io
 
-``` /token ```
+* ICON T-Bears Guide  
+https://icondev.io/docs/development-environment
+* ICON icon-rpc-server Guide  
+https://icondev.io/docs/json-rpc-specification
+* ICON SCORE Guide  
+https://www.icondev.io/docs/overview
 
-1. 사용자가 원하는 만큼의 Token을 mint 한다.
-2. BlackJack Game에 있는 mintToken() 메서드를 통해 Token을 Mint 합니다.
-3. Sign에는 ICONex를 활용한다.
+
+#### 3. Tracker
+Mainnet : https://tracker.icon.foundation
+
+Testnet : https://bicon.tracker.solidwallet.io
 
 
+#### 4. ICONex (ICON wallet chrome web store for download)
+https://chrome.google.com/webstore/detail/iconex/flpiciilemghbmfalicajoolhkkenfel?hl=ko
 
+#### 5. Faucet (Testnet)
+http://52.88.70.222
 
-## Start Sample 
+#### 6. Other Communities
+Facebook (Dive into ICON) : https://www.facebook.com/groups/DiveintoICON/
 
-1. Clone this repo 
+Medium (BLOCKCHAIN STUDY GROUP) : https://medium.com/b-ock-chain
 
-2. start django server 
-   
-    ```$ cd samplepage/ ```
-    ```$ python manage runserver 0.0.0.0:8000```
+Youtube (ICON Developers) : https://www.youtube.com/channel/UC8h4kVV7w94xmfCz6FbwHhg
 
