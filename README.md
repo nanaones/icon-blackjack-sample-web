@@ -1,7 +1,7 @@
 # Dive-into-ICON-3-DApp
 
 ## Prerequisite
-**If you didn't attend the first workshop 'Dive into ICON - Tools' and second workshop 'Dive into ICON - SCORE', we strongly recommend you to finish the step-by-step quickstart guide below before you attend the second workshop. Don't worry, it won't take long.**
+**If you didn't attend the first workshop 'Dive into ICON - Tools' and the second workshop 'Dive into ICON - SCORE', we strongly recommend you to finish the step-by-step quickstart guide below before you attend this workshop. Don't worry, it won't take long.**
 
 #### Quickstart part 1. Helloworld on local emulated environment
 - [English Guide](https://www.icondev.io/docs/part-1-helloworld-on-local-emulated-environment)
@@ -12,7 +12,7 @@
 - [Korean Guide](/docs/workshop_3_prerequisite_part_2_kr.md)
 
 
-For this second workshop, following environments are required. If you have any issues, please join the facebook group, [Dive into ICON](https://www.facebook.com/groups/DiveintoICON) and post your questions there ! We are happy to help you. 
+For this third workshop, following environments are required. If you have any issues, please join the facebook group, [Dive into ICON](https://www.facebook.com/groups/DiveintoICON), and post your questions there ! We are happy to help you. 
 
 - Linux (Ubuntu 18.04 recommended) or OS X
 - Python 3.6 and ```Python IDE``` (**Pycharm recommended**)
@@ -22,7 +22,7 @@ For this second workshop, following environments are required. If you have any i
 - **Chrome Browser** installed
 - **Chrome Extentions, [ICONex](https://chrome.google.com/webstore/detail/iconex/flpiciilemghbmfalicajoolhkkenfel?hl=ko)** installed.
 - Git required. Please clone this repo. 
-- **We expect you to have some ```python```, ```javascript``` experience, and have basic knowledge about ICON development tools and SCORE.**
+- **We expect you to have some ```python``` and ```javascript``` experience, and have basic knowledge about ICON development tools and SCORE.**
 - We expect you to have some **WebFramework experience**(```django``` or ```spring``` ... ).
 
 ## Today's Goal 
@@ -52,7 +52,7 @@ https://icondev.io/docs/development-environment
 * ICON icon-rpc-server Guide  
 https://icondev.io/docs/json-rpc-specification
 * ICON SCORE Guide  
-https://www.icondev.io/docs/overview
+https://icondev.io/docs/overview
 
 
 #### 3. Tracker
@@ -74,15 +74,10 @@ Medium (BLOCKCHAIN STUDY GROUP) : https://medium.com/b-ock-chain
 
 Youtube (ICON Developers) : https://www.youtube.com/channel/UC8h4kVV7w94xmfCz6FbwHhg
 
-#### 7. ICON Workchop Github
+#### 7. ICON Workshop Github
 
-https://github.com/icon-project
+1.ICON Development Tools : https://github.com/icon-workshops/Dive-into-ICON-1-Tools
 
-
-[ICON Tools]
-https://github.com/icon-workshops/Dive-into-ICON-1-Tools
-
-[ICON SCORE(SmartContract On Reliable Environment)]
-https://github.com/icon-workshops/Dive-into-ICON-2-SCORE
+2.ICON Smart Contract - SCORE : https://github.com/icon-workshops/Dive-into-ICON-2-SCORE
 
 
