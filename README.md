@@ -1,3 +1,9 @@
+# 이 프로젝트는 ICON 의 workshop( Dive into ICON ) 시리즈의 일부로 채택되어 [Dive-into-ICON-3-DApp](https://github.com/icon-workshops/Dive-into-ICON-3-DApp)으로 이동되었습니다. 
+
+---
+
+
+
 # Dive-into-ICON-3-DApp
 
 ## Prerequisite
